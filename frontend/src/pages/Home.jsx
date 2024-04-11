@@ -1,6 +1,6 @@
 function Home() {
   return (
-    <div className="px-20">
+    <div className="px-20 pt-10">
       <h1 className="text-2xl font-bold">Home</h1>
     </div>
   );

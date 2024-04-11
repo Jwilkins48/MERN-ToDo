@@ -6,7 +6,7 @@ function Navbar() {
   const { logOut } = useLogOut();
 
   return (
-    <nav className="flex justify-between px-20 py-9 border-b-2 mb-8">
+    <nav className="flex justify-between items-center px-20 h-[6.5rem] border-b-2">
       <a className="text-3xl font-bold" href="/">
         ToDo
       </a>
