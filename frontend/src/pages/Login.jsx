@@ -13,7 +13,10 @@ function Login() {
 
   return (
     <div className="h-[calc(100vh-6.5rem)] flex items-center justify-center">
-      <form onSubmit={handleSubmit} className="border-2 border-secondary">
+      <form
+        onSubmit={handleSubmit}
+        className="border-2 border-secondary enterForm"
+      >
         <h3>Login</h3>
         <label>Email</label>
         <input
@@ -36,7 +39,7 @@ function Login() {
         <button className="form-btn" disabled={isLoading}>
           Submit
         </button>
-        {error && <div className="error">{error}</div>}
+        {error && <div className="error mt-2">{error}</div>}
       </form>
     </div>
   );
