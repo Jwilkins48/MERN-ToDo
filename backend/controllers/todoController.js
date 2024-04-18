@@ -18,8 +18,8 @@ const createTodo = async (req, res) => {
   }
 
   try {
-    // const userId = req.user._id;
-    const newTodo = await Todo.create({ todo });
+    const userId = req.user._id;
+    const newTodo = await Todo.create({ todo, userId });
     res.status(201).json(newTodo);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -28,18 +28,16 @@ const createTodo = async (req, res) => {
 
 // - /api/todo
 const displayTodos = async (req, res) => {
-  // const userId = req.user._id;
-  const todos = await Todo.find({}).sort({ createdAt: -1 });
-
+  const userId = req.user._id;
+  const todos = await Todo.find({ userId }).sort({ createdAt: -1 });
   res.status(200).json(todos);
 };
 
 // - /api/todo/:id
 const displayTodo = async (req, res) => {
-  // const {id} = req.params;
-  // const todo = await Todo.find({ id });
-  // res.status(200).json(todo);
-  res.send("display single todo");
+  const { id } = req.params;
+  const todo = await Todo.find({ id });
+  res.status(200).json(todo);
 };
 
 const deleteTodos = async (req, res) => {

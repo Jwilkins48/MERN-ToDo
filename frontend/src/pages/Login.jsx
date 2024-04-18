@@ -17,7 +17,11 @@ function Login() {
         onSubmit={handleSubmit}
         className="border-2 border-secondary enterForm"
       >
-        <h3>Login</h3>
+        <h3>Welcome Back!</h3>
+        {error && (
+          <div className="justify-center flex text-error mt-2">{error}</div>
+        )}
+
         <label>Email</label>
         <input
           type="email"
@@ -35,11 +39,15 @@ function Login() {
           placeholder="Password"
           onChange={(e) => setPassword(e.currentTarget.value)}
         />
-
-        <button className="form-btn" disabled={isLoading}>
-          Submit
-        </button>
-        {error && <div className="error mt-2">{error}</div>}
+        <div>
+          <button className="form-btn" disabled={isLoading}>
+            Sign In
+          </button>
+          <hr className="h-px bg-secondary mt-8 m-auto border-0  w-[60%]"></hr>
+          <a className="flex justify-center mt-4 pt-1" href="/signUp">
+            Sign Up
+          </a>
+        </div>
       </form>
     </div>
   );

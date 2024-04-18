@@ -7,7 +7,7 @@ function Navbar() {
 
   return (
     <nav className="flex justify-between items-center px-20 h-[6.5rem] border-b-2">
-      <a className="text-3xl font-bold" href="/">
+      <a className="text-3xl font-bold text-secondary" href="/">
         ToDo
       </a>
 
@@ -17,7 +17,7 @@ function Navbar() {
             <li>
               <a href="/signUp">Sign Up</a>
             </li>
-            <li>
+            <li className="text-secondary">
               <a href="/login">Login</a>
             </li>
           </ul>

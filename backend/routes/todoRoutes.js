@@ -1,4 +1,4 @@
-//import requireAuth from "../middleware/requireAuth.js";
+import requireAuth from "../middleware/requireAuth.js";
 import express from "express";
 import {
   createTodo,
@@ -9,7 +9,7 @@ import {
 } from "../controllers/todoController.js";
 
 const router = express.Router();
-// router.use(requireAuth);
+router.use(requireAuth);
 
 // create todo - POST /api/todo
 router.post("/", createTodo);

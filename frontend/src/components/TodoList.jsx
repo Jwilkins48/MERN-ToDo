@@ -15,7 +15,7 @@ function TodoList({ todo }) {
     });
 
     const json = await response.json();
-    console.log(json);
+    console.log(`Deleted ${json.todo}`);
 
     if (response.ok) {
       dispatch({ type: "DELETE_TODO", payload: json });
