@@ -36,7 +36,17 @@ const displayTodos = async (req, res) => {
 // - /api/todo/:id
 const displayTodo = async (req, res) => {
   const { id } = req.params;
-  const todo = await Todo.find({ id });
+
+  // ID not valid
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: "Not Todo !!!Found" });
+  }
+
+  const todo = await Todo.findById(id);
+  if (!todo) {
+    return res.status(400).json({ error: "Not Todo Found" });
+  }
+
   res.status(200).json(todo);
 };
 
@@ -55,8 +65,27 @@ const deleteTodos = async (req, res) => {
   res.status(200).json(todo);
 };
 
-const updateTodos = (req, res) => {
-  res.send("update todo");
+const updateTodos = async (req, res) => {
+  const { id } = req.params;
+
+  // Update and replace as new
+  const todo = await Todo.findByIdAndUpdate(
+    { _id: id },
+    { ...req.body },
+    { new: true }
+  );
+
+  // Make sure param id is valid
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "Invalid id" });
+  }
+
+  // No matching todo
+  if (!todo) {
+    return res.status(400).json({ error: "No Todo Found" });
+  }
+
+  res.status(200).json(req.body);
 };
 
 export { createTodo, displayTodo, displayTodos, deleteTodos, updateTodos };

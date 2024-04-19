@@ -1,11 +1,18 @@
 import { useTodoContext } from "../hooks/useTodoContext.jsx";
 import { useAuthContext } from "../hooks/useAuthContext.jsx";
+import { useNavigate } from "react-router-dom";
 
 function TodoList({ todo }) {
+  const navigate = useNavigate();
   const { user } = useAuthContext();
   const { dispatch } = useTodoContext();
 
-  const handleDelete = async () => {
+  const handleClick = async () => {
+    navigate(`todo/${todo._id}`);
+  };
+
+  const handleDelete = async (e) => {
+    e.stopPropagation();
     if (!user) {
       return;
     }
@@ -22,7 +29,10 @@ function TodoList({ todo }) {
     }
   };
   return (
-    <div className="border-2 p-10 mb-4 rounded text-xl flex justify-between">
+    <div
+      onClick={handleClick}
+      className="border-2 p-10 mb-4 rounded text-xl flex justify-between"
+    >
       <div>{todo.todo}</div>
 
       <button onClick={handleDelete}>Delete</button>

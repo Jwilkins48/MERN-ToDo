@@ -8,6 +8,10 @@ export const todoReducer = (state, action) => {
       return {
         todos: action.payload,
       };
+    case "UPDATE_TODO":
+      return {
+        todos: action.payload,
+      };
     case "CREATE_TODO":
       return {
         todos: [action.payload, ...state.todos],

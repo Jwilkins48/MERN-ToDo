@@ -33,8 +33,11 @@ function Home() {
         <h1 className="text-2xl font-bold mb-2 text-3xl">Tasks:</h1>
 
         <div className="todos">
-          {todos &&
-            todos?.map((todo) => <TodoList key={todo._id} todo={todo} />)}
+          {todos ? (
+            todos?.map((todo) => <TodoList key={todo._id} todo={todo} />)
+          ) : (
+            <h2>Loading...</h2>
+          )}
         </div>
       </div>
 
