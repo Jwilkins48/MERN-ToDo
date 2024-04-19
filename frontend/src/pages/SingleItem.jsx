@@ -1,16 +1,16 @@
 import { useAuthContext } from "../hooks/useAuthContext.jsx";
 import { useTodoContext } from "../hooks/useTodoContext.jsx";
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 function SingleItem() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { user } = useAuthContext();
   const [todo, setTodo] = useState();
   const { dispatch } = useTodoContext();
   const [newTask, setNewTask] = useState("");
-  const navigate = useNavigate();
 
   // Display todo
   useEffect(() => {
@@ -33,21 +33,24 @@ function SingleItem() {
   // Input Change
   const handleChange = (e) => {
     setNewTask(e.currentTarget.value);
-    console.log(newTask);
   };
 
   // Update onClick
   const handleClick = async () => {
-    const response = await fetch(`http://localhost:4000/api/todo/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${user.token}`,
-      },
-      body: JSON.stringify({ todo: newTask }),
-    });
+    if (newTask) {
+      const response = await fetch(`http://localhost:4000/api/todo/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+        body: JSON.stringify({ todo: newTask }),
+      });
 
-    if (response.ok) {
+      if (response.ok) {
+        navigate("/");
+      }
+    } else {
       navigate("/");
     }
   };
